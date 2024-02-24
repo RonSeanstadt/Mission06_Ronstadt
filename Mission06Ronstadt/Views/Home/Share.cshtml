@@ -1,51 +1,77 @@
 ﻿@{
     ViewData["Title"] = "Share";
 }
-@model Application
+@model Movie
 
 <h1 style="text-align: center;">Submit movies for Joel to add to his collection!</h1>
 <br />
 <form style="max-width: 400px; margin: 0 auto;" method="post">
+
+    <input type="hidden" asp-for="MovieId" />
+
     <div style="margin-bottom: 10px;">
-        <label asp-for="category" style="display: block;">Category:</label>
-        <input asp-for="category" type="text" style="width: 100%;">
+        <label asp-for="Title" style="display: block;">Title:</label>
+        <input asp-for="Title" type="text" style="width: 100%;">
     </div>
     <div style="margin-bottom: 10px;">
-        <label asp-for="title" style="display: block;">Title:</label>
-        <input asp-for="title" type="text" style="width: 100%;">
+        <label asp-for="CategoryId" style="display: block;">Category:</label>
+        <select asp-for="CategoryId">
+            @foreach (Categories c in ViewBag.Categories)
+            {
+                <option value="@c.CategoryId">@c.Category</option>
+            }
+        </select>
     </div>
     <div style="margin-bottom: 10px;">
-        <label asp-for="year" style="display: block;">Year:</label>
-        <input asp-for="year" type="number" min="1900" max="2024" step="1" style="width: 100%;">
+        <label asp-for="Year" style="display: block;">Year:</label>
+        <input asp-for="Year" type="number" min="1888" max="2024" step="1" style="width: 100%;">
     </div>
     <div style="margin-bottom: 10px;">
-        <label asp-for="director" style="display: block;">Director:</label>
-        <input asp-for="director" type="text" style="width: 100%;">
+        <label asp-for="Director" style="display: block;">Director:</label>
+        <input asp-for="Director" type="text" style="width: 100%;">
     </div>
     <div style="margin-bottom: 10px;">
-        <label asp-for="rating" style="display: block;">Rating:</label>
-        <select asp-for="rating">
+        <label asp-for="Rating" style="display: block;">Rating:</label>
+        <select asp-for="Rating">
             <option value="G">G</option>
             <option value="PG">PG</option>
             <option value="PG-13">PG-13</option>
             <option value="R">R</option>
+            <option value="NR">NR</option>
+            <option value="UR">UR</option>
+            <option value="TV-Y">TV-Y</option>
+            <option value="TV-Y7">TV-Y7</option>
+            <option value="TV-Y7-FV">TV-Y7-FV</option>
+            <option value="TV-G">TV-G</option>
+            <option value="TV-PG">TV-PG</option>
+            <option value="TV-14">TV-14</option>
+            <option value="TV-MA">TV-MA</option>
         </select>
     </div>
     <div style="margin-bottom: 10px;">
-        <label asp-for="edited" style="display: block;">Was it Edited?</label>
-        <select asp-for="edited">
+        <label asp-for="Edited" style="display: block;">Was it Edited?</label>
+        <select asp-for="Edited">
             <option value="true">Yes</option>
             <option value="false">No</option>
         </select>
     </div>
     <div style="margin-bottom: 10px;">
-        <label asp-for="lentTo" style="display: block;">Lent To:</label>
-        <input asp-for="lentTo" type="text" style="width: 100%;">
+        <label asp-for="LentTo" style="display: block;">Lent To:</label>
+        <input asp-for="LentTo" type="text" style="width: 100%;">
     </div>
     <div style="margin-bottom: 10px;">
-    <label asp-for="notes" style="display: block;">Notes:</label>
-    <input asp-for="notes" type="text" style="width: 100%;" maxlength="25"></input>
+        <label asp-for="CopiedToPlex" style="display: block;">Copied to plex?</label>
+        <select asp-for="CopiedToPlex">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+    </div>
+    <div style="margin-bottom: 10px;">
+    <label asp-for="Notes" style="display: block;">Notes:</label>
+        <input asp-for="Notes" type="text" style="width: 100%;" maxlength="25"></input>
     </div>
 
     <button type="submit" style="width: 100%;">Submit Movie</button>
+
+    <div asp-validation-summary="All"></div>
 </form>
